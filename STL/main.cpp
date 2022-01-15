@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 #include<array>
 #include<vector>
 using namespace std;
@@ -7,7 +7,8 @@ using namespace std;
 
 //#define STL_ARRAY
 //#define STL_VECTOR
-#define STL_VECTOR_INSERT
+//#define STL_VECTOR_INSERT
+#define STL_VECTOR_ERASE
 
 void main()
 {
@@ -22,10 +23,10 @@ void main()
 #endif // STL_ARRAY
 
 #ifdef STL_VECTOR
-	//vector  - это последовательный контейнер, который хранит данные в виде динамического массива
+	//vector  - СЌС‚Рѕ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅС‹Р№ РєРѕРЅС‚РµР№РЅРµСЂ, РєРѕС‚РѕСЂС‹Р№ С…СЂР°РЅРёС‚ РґР°РЅРЅС‹Рµ РІ РІРёРґРµ РґРёРЅР°РјРёС‡РµСЃРєРѕРіРѕ РјР°СЃСЃРёРІР°
 	vector<int> vec={0,1,1,2,3,5,8,13,21,34,55,89,144,232};
 	cout << "Size:     " << vec.size() << endl;
-	cout << "Capacity: " << vec.capacity() << endl; //есть только у вектора
+	cout << "Capacity: " << vec.capacity() << endl; //РµСЃС‚СЊ С‚РѕР»СЊРєРѕ Сѓ РІРµРєС‚РѕСЂР°
 	cout << "MaxSize:  " << vec.max_size() << endl;
 	cout << sizeof(vec) << endl;
 	//int* data = vec.data();
@@ -47,23 +48,26 @@ void main()
 		cerr << e.what() << endl;
 	}
 	cout << "Size:     " << vec.size() << endl;
-	cout << "Capacity: " << vec.capacity() << endl; //есть только у вектора
+	cout << "Capacity: " << vec.capacity() << endl; //РµСЃС‚СЊ С‚РѕР»СЊРєРѕ Сѓ РІРµРєС‚РѕСЂР°
 	cout << "MaxSize:  " << vec.max_size() << endl;
 	cout << sizeof(vec) << endl;
 #endif // STL_VECTOR
 	
 #ifdef STL_VECTOR_INSERT
 	vector<int> vec = { 0,1,1,2,3,5,8,13,21,34,55,89,144,232 };
+	for (int i : vec)
+		cout << i << tab;
+	cout << endl;
 	cout << "Size:     " << vec.size() << endl;
 	cout << "Capacity: " << vec.capacity() << endl;
 	int index;
 	int value;
 	do
 	{
-		cout << "Введите индекс добавляемого значения: "; cin >> index;
-		if (index > vec.size())cout << "Введите другое значение\n";
+		cout << "Р’РІРµРґРёС‚Рµ РёРЅРґРµРєСЃ РґРѕР±Р°РІР»СЏРµРјРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ: "; cin >> index;
+		if (index > vec.size())cout << "Р’РІРµРґРёС‚Рµ РґСЂСѓРіРѕРµ Р·РЅР°С‡РµРЅРёРµ\n";
 	} while (index > vec.size());
-	cout << "Введите добавляемое значение: "; cin >> value;
+	cout << "Р’РІРµРґРёС‚Рµ РґРѕР±Р°РІР»СЏРµРјРѕРµ Р·РЅР°С‡РµРЅРёРµ: "; cin >> value;
 	vector<int>::iterator position = vec.begin() + index;
 	vec.insert(position, value);
 	for (int i : vec)
@@ -72,5 +76,27 @@ void main()
 	cout << "Size:     " << vec.size() << endl;
 	cout << "Capacity: " << vec.capacity() << endl;
 #endif // STL_VECTOR_INSERT
+
+#ifdef STL_VECTOR_ERASE
+	vector<int> vec = { 0,1,1,2,3,5,8,13,21,34,55,89,144,232 };
+	for (int i : vec)
+		cout << i << tab;
+	cout << endl;
+	cout << "Size:     " << vec.size() << endl;
+	cout << "Capacity: " << vec.capacity() << endl;
+	int index;
+	do
+	{
+		cout << "Р’РІРµРґРёС‚Рµ РёРЅРґРµРєСЃ РґРѕР±Р°РІР»СЏРµРјРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ: "; cin >> index;
+		if (index > vec.size())cout << "Р’РІРµРґРёС‚Рµ РґСЂСѓРіРѕРµ Р·РЅР°С‡РµРЅРёРµ\n";
+	} while (index > vec.size());
+	vector<int>::iterator position = vec.begin() + index;
+	vec.erase(vec.begin() + index);
+	for (int i : vec)
+		cout << i << tab;
+	cout << endl;
+	cout << "Size:     " << vec.size() << endl;
+	cout << "Capacity: " << vec.capacity() << endl;
+#endif // STL_VECTOR_ERASE
 
 }
