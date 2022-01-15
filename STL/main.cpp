@@ -87,10 +87,9 @@ void main()
 	int index;
 	do
 	{
-		cout << "Введите индекс добавляемого значения: "; cin >> index;
+		cout << "Введите индекс удаляемого значения: "; cin >> index;
 		if (index > vec.size())cout << "Введите другое значение\n";
-	} while (index > vec.size());
-	vector<int>::iterator position = vec.begin() + index;
+	} while (index >= vec.size());
 	vec.erase(vec.begin() + index);
 	for (int i : vec)
 		cout << i << tab;
