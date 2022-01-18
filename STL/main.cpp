@@ -8,7 +8,19 @@ using namespace std;
 //#define STL_ARRAY
 //#define STL_VECTOR
 //#define STL_VECTOR_INSERT
-#define STL_VECTOR_ERASE
+//#define STL_VECTOR_ERASE
+//#define STL_VECTOR_INSERT2
+//#define STL_VECTOR_INSERT3
+//#define STL_VECTOR_ERASE2
+
+template<typename T>void print(const vector<T>& vec)
+{
+	for (typename vector<T>::const_iterator it = vec.begin(); it != vec.end(); it++)
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
+}
 
 void main()
 {
@@ -97,5 +109,76 @@ void main()
 	cout << "Size:     " << vec.size() << endl;
 	cout << "Capacity: " << vec.capacity() << endl;
 #endif // STL_VECTOR_ERASE
+
+#ifdef STL_VECTOR_INSERT2
+	vector<int> vec = { 0,1,1,2,3,5,8,13,21,34,55,89,144,232 };
+	for (int i : vec)
+		cout << i << tab;
+	cout << endl;
+	cout << "Size:     " << vec.size() << endl;
+	cout << "Capacity: " << vec.capacity() << endl;
+
+	int index;
+	int value;
+	int count;
+	cout << "Введите индекс добавляемого элемента: "; cin >> index;
+	cout << "Введите количество добавлений: "; cin >> count;
+	cout << "Введите значение добавляемого элемента: "; cin >> value;
+	if (index < vec.size())vec.insert(vec.begin() + index, count, value);
+	else cout << "Error: out of range" << endl;
+	print(vec);
+#endif // STL_VECTOR_INSERT2
+
+#ifdef STL_VECTOR_INSERT3
+	vector<int> vec = { 0,1,1,2,3,5,8,13,21,34,55,89,144,232 };
+	for (int i : vec)
+		cout << i << tab;
+	cout << endl;
+	cout << "Size:     " << vec.size() << endl;
+	cout << "Capacity: " << vec.capacity() << endl;
+
+	int index;
+	int value;
+	int count;
+	cout << "Введите индекс добавляемого элемента: "; cin >> index;
+	cout << "Введите количество добавлений: "; cin >> count;
+	cout << "Введите значение добавляемого элемента: "; cin >> value;
+	if (index < vec.size())vec.insert(vec.begin() + index, count, value);
+	else cout << "Error: out of range" << endl;
+	print(vec);
+
+	std::vector<int> powers = { 1024, 2048, 4096, 8192, 16384 };
+
+	//vec.insert(vec.begin() + 3, powers.begin(), powers.end());
+	vec.insert(vec.begin() + 8, { 256, 384, 512, 768 });
+	for (int i : vec)cout << i << tab; cout << endl;
+
+	/*vec.insert(vec.begin() + 4, vec.begin()+15, vec.begin()+17);
+	for (int i : vec)cout << i << tab; cout << endl;*/
+#endif // STL_VECTOR_INSERT3
+
+#ifdef STL_VECTOR_ERASE2
+	vector<int> vec = { 0,1,1,2,3,5,8,13,21,34,55,89,144,232 };
+	for (int i : vec)
+		cout << i << tab;
+	cout << endl;
+	cout << "Size:     " << vec.size() << endl;
+	cout << "Capacity: " << vec.capacity() << endl;
+
+	int index;
+	int value;
+	int count;
+
+	cout << "Введите индекс удобавляемого элемента: "; cin >> index;
+	cout << "Введите количество удобавлений: "; cin >> count;
+	vec.erase(vec.begin() + index, vec.begin() + index + count);
+	print(vec);
+
+	std::vector<int> powers = { 1024, 2048, 4096, 8192, 16384 };
+
+	vec.swap(powers);
+	print(vec);
+	print(powers);
+#endif // STL_VECTOR_ERASE2
 
 }
