@@ -1,6 +1,8 @@
 ﻿#include<iostream>
 #include<array>
 #include<vector>
+#include<deque>
+#include<list>
 using namespace std;
 
 #define tab "\t"
@@ -12,6 +14,9 @@ using namespace std;
 //#define STL_VECTOR_INSERT2
 //#define STL_VECTOR_INSERT3
 //#define STL_VECTOR_ERASE2
+//#define STL_DEQUE
+//#define STL_LIST_INSERT
+#define STL_LIST_ERASE
 
 template<typename T>void print(const vector<T>& vec)
 {
@@ -181,4 +186,58 @@ void main()
 	print(powers);
 #endif // STL_VECTOR_ERASE2
 
+#ifdef STL_DEQUE
+	std::deque<int> deque = { 3,5,8,13,21 };
+	deque.push_back(34);
+	deque.push_back(55);
+	deque.push_back(79);
+	deque.push_front(2);
+	deque.push_front(1);
+	deque.push_front(1);
+	deque.push_front(0);
+	for (int i = 0; i < deque.size(); i++)
+	{
+		cout << deque[i] << tab;
+	}
+	cout << endl;
+
+	std::deque<int> d_powers = { 256,512,768 };
+	//deque.push_back(*d_powers.begin() + 1);
+	for (int i : deque)cout << i << tab; cout << endl;
+	for (int i : d_powers)cout << i << tab; cout << endl;
+#endif // STL_DEQUE
+
+#ifdef STL_LIST_INSERT
+	std::list<int> list = { 3,5,8,13,21 };
+	for (int i : list)cout << i << tab; cout << endl;
+	int index;
+	int value;
+	int count;
+	do
+	{
+		cout << "Введите индекс добавляемого значения: "; cin >> index;
+		if (index > list.size())cout << "Введите другое значение\n";
+	} while (index > list.size());
+	cout << "Введите количество добавлений: "; cin >> count;
+	cout << "Введите добавляемое значение: "; cin >> value;
+	std::list<int>::iterator position = list.begin();
+	for (int i = 0; i < index; i++)position++;
+	list.insert(position, count, value);
+	for (int i : list)cout << i << tab; cout << endl;
+#endif // STL_LIST_INSERT
+
+#ifdef STL_LIST_ERASE
+	std::list<int> list = { 3,5,8,13,21 };
+	for (int i : list)cout << i << tab; cout << endl;
+	int index;
+	do
+	{
+		cout << "Введите индекс удаляемого значения: "; cin >> index;
+		if (index >= list.size())cout << "Введите другое значение\n";
+	} while (index >= list.size());
+	std::list<int>::iterator position = list.begin();
+	for (int i = 0; i < index; i++)position++;
+	list.erase(position);
+	for (int i : list)cout << i << tab; cout << endl;
+#endif // STL_LIST_ERASE
 }
