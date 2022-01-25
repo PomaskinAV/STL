@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 #include<string>
 #include<map>
 #include<list>
@@ -10,11 +10,11 @@ using namespace std;
 
 const map<int, string>& crimes =
 {
-	pair<int, string>(1, "Превышение скорости"),
-	pair<int, string>(2, "Проезд на красный"),
-	pair<int, string>(3, "Парковка в не положенном месте"),
-	pair<int, string>(4, "Оскорбление офицера"),
-	pair<int, string>(5, "Пересечение сплошной линии")
+	pair<int, string>(1, "РџСЂРµРІС‹С€РµРЅРёРµ СЃРєРѕСЂРѕСЃС‚Рё"),
+	pair<int, string>(2, "РџСЂРѕРµР·Рґ РЅР° РєСЂР°СЃРЅС‹Р№"),
+	pair<int, string>(3, "РџР°СЂРєРѕРІРєР° РІ РЅРµ РїРѕР»РѕР¶РµРЅРЅРѕРј РјРµСЃС‚Рµ"),
+	pair<int, string>(4, "РћСЃРєРѕСЂР±Р»РµРЅРёРµ РѕС„РёС†РµСЂР°"),
+	pair<int, string>(5, "РџРµСЂРµСЃРµС‡РµРЅРёРµ СЃРїР»РѕС€РЅРѕР№ Р»РёРЅРёРё")
 };
 
 class Crime
@@ -49,7 +49,7 @@ public:
 	}
 	istream& scan(istream& is)
 	{
-		is.ignore(); //Игнорирует 1 символ из буфера ввода (в данном случае '\n').
+		is.ignore(); //РРіРЅРѕСЂРёСЂСѓРµС‚ 1 СЃРёРјРІРѕР» РёР· Р±СѓС„РµСЂР° РІРІРѕРґР° (РІ РґР°РЅРЅРѕРј СЃР»СѓС‡Р°Рµ '\n').
 		//getline(is, crime_id, ',');
 		cin >> crime_id;
 		getline(is, place);
@@ -79,9 +79,9 @@ void main()
 	SetConsoleOutputCP(1251);
 	map<string, list<Crime>> base =
 	{
-		pair<string, list<Crime>>("m777ko", list<Crime>{Crime(1, "Улица Ленина"), Crime(2, "Улица Октябрьская")}),
-		pair<string, list<Crime>>("b510ma", list<Crime>{Crime(3, "ТЦ Экватор")}),
-		pair<string, list<Crime>>("a213bb", list<Crime>{Crime(4, "Красная площадь")})
+		pair<string, list<Crime>>("m777ko", list<Crime>{Crime(1, "РЈР»РёС†Р° Р›РµРЅРёРЅР°"), Crime(2, "РЈР»РёС†Р° РћРєС‚СЏР±СЂСЊСЃРєР°СЏ")}),
+		pair<string, list<Crime>>("b510ma", list<Crime>{Crime(3, "РўР¦ Р­РєРІР°С‚РѕСЂ")}),
+		pair<string, list<Crime>>("a213bb", list<Crime>{Crime(4, "РљСЂР°СЃРЅР°СЏ РїР»РѕС‰Р°РґСЊ")})
 	};
 	
 	/*for (list<Crime>::iterator it = base["m777ko"].begin(); it != base["m777ko"].end(); ++it)
@@ -91,8 +91,8 @@ void main()
 
 	string licence_place;
 	Crime crime;
-	cout << "Введите номер автомобиля: "; cin >> licence_place;
-	cout << "Введите правонарушение: "; cin >> crime;
+	cout << "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ Р°РІС‚РѕРјРѕР±РёР»СЏ: "; cin >> licence_place;
+	cout << "Р’РІРµРґРёС‚Рµ РїСЂР°РІРѕРЅР°СЂСѓС€РµРЅРёРµ: "; cin >> crime;
 	base[licence_place].push_back(crime);
 	print(base);
 	save_base(base);
