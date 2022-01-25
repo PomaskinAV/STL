@@ -3,6 +3,7 @@
 #include<map>
 #include<list>
 #include<Windows.h>
+#include<fstream>
 using namespace std;
 
 #define tab "\t"
@@ -18,12 +19,12 @@ const map<int, string>& crimes =
 
 class Crime
 {
-	string crime;
+	int crime_id;
 	string place;
 public:
-	const string& get_crime()const
+	int get_crime()const
 	{
-		return crime;
+		return crime_id;
 	}
 	const string& get_place()const
 	{
@@ -33,9 +34,9 @@ public:
 	{
 
 	}
-	Crime(const string& crime, const string& place)
+	Crime(int crime, const string& place)
 	{
-		this->crime = crime;
+		this->crime_id = crime;
 		this->place = place;
 	}
 	~Crime()
@@ -44,13 +45,14 @@ public:
 	}
 	ostream& print(ostream& os)const
 	{
-		return os << crime << " " << place;
+		return os << crimes.at(crime_id) << " " << place;
 	}
 	istream& scan(istream& is)
 	{
 		is.ignore(); //Игнорирует 1 символ из буфера ввода (в данном случае '\n').
-		getline(is, crime, ',');
-		getline(is, place, '.');
+		//getline(is, crime_id, ',');
+		cin >> crime_id;
+		getline(is, place);
 		return is;
 	}
 };
@@ -66,16 +68,20 @@ istream& operator>>(istream& is, Crime& obj)
 
 void print(const map<string, list<Crime>>& base);
 
+const string base_name = "base.txt";
+
+void save_base(const map<string, list<Crime>>& base);
+
 void main()
 {
-	//setlocale(LC_ALL, "");
+	setlocale(LC_ALL, "");
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	map<string, list<Crime>> base =
 	{
-		pair<string, list<Crime>>("m777ko", list<Crime>{Crime("Превышение скорости", "Улица Ленина"), Crime("Проезд на красный", "Улица Октябрьская")}),
-		pair<string, list<Crime>>("b510ma", list<Crime>{Crime("Парковка в неположенном месте", "ТЦ Экватор")}),
-		pair<string, list<Crime>>("a213bb", list<Crime>{Crime("Оскорбление офицера", "Красная площадь")})
+		pair<string, list<Crime>>("m777ko", list<Crime>{Crime(1, "Улица Ленина"), Crime(2, "Улица Октябрьская")}),
+		pair<string, list<Crime>>("b510ma", list<Crime>{Crime(3, "ТЦ Экватор")}),
+		pair<string, list<Crime>>("a213bb", list<Crime>{Crime(4, "Красная площадь")})
 	};
 	
 	/*for (list<Crime>::iterator it = base["m777ko"].begin(); it != base["m777ko"].end(); ++it)
@@ -89,6 +95,7 @@ void main()
 	cout << "Введите правонарушение: "; cin >> crime;
 	base[licence_place].push_back(crime);
 	print(base);
+	save_base(base);
 }
 
 void print(const map<string, list<Crime>>& base)
@@ -101,4 +108,22 @@ void print(const map<string, list<Crime>>& base)
 			cout << *l_it << endl;
 		}
 	}
+}
+
+void save_base(const map<string, list<Crime>>& base)
+{
+	ofstream fout(base_name);
+	for (map<string, list<Crime>>::const_iterator it = base.begin(); it != base.end(); it++)
+	{
+		fout << it->first << ":";
+		for (list<Crime>::const_iterator l_it = it->second.begin(); l_it != it->second.end(); l_it++)
+		{
+			fout << *l_it;
+			if (l_it != --(it->second.end()))fout << ",";
+		}
+		fout << ";\n";
+	}
+	fout.close();
+	string command = "start notepad " + base_name;
+	system(command.c_str());
 }
